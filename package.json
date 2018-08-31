@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/nsc-open/arcgis-utils/issues"
   },
-  "homepage": "https://github.com/nsc-open/arcgis-utils#readme"
+  "homepage": "https://github.com/nsc-open/arcgis-utils#readme",
+  "dependencies": {
+    "lodash.memoize": "^4.1.2"
+  }
 }
