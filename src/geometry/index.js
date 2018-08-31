@@ -5,6 +5,7 @@ const getPolylinePaths = (polyline = {}) => polyline.paths || polyline.curvePath
 const getPolygonRings = (polygon = {}) => polygon.rings || polygon.curveRings
 
 /**
+ * For geometry objects, please refer: https://developers.arcgis.com/documentation/common-data-types/geometry-objects.htm
  * 
  * @param {Object} geometryJson 
  */
@@ -12,14 +13,16 @@ export const getGeometryTypeFromJson = (geometryJson = {}) => {
   const { POINT, MULTIPOINT, POLYLINE, POLYGON, EXTENT } = GEOMETRY_TYPES
   if ('x' in geometryJson) {
     return POINT
-  } else if ('rings' in geometryJson || 'curveRings' in geometryJson) {
-    return POLYGON
-  } else if ('paths' in geometryJson || 'curvePaths' in geometryJson) {
-    return POLYLINE
-  } else if ('points' in geometryJson) {
-    return MULTIPOINT
   } else if ('xmin' in geometryJson) {
     return EXTENT
+  } else if (geometryJson.rings || geometryJson.curveRings) {
+    return POLYGON
+  } else if (geometryJson.paths || geometryJson.curvePaths) {
+    return POLYLINE
+  } else if (geometryJson.points) {
+    return MULTIPOINT
+  } else {
+    return null
   }
 }
 
